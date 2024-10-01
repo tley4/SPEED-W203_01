@@ -1,8 +1,6 @@
 export default function Home(){
     return(
-        <div>
-            <h1></h1>
-        </div>
+     <main>Opening page, possibly will be the log in page</main>
     );
  
 
