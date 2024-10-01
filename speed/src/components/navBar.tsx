@@ -1,18 +1,19 @@
 import React from 'react';
 import Link from 'next/link';
-import '../css/navBar.css';
+import '../css/navBar.scss';
 
 const Navbar: React.FC = () => {
   return (
-    <div className="navbar bg-base-100" style={{ fontFamily: 'Courier New, monospace' }}>
+    <div className="navbar">
       <div className="flex-1">
-        <a className="bg-[#C7F6C7] text-6xl w-60 h-35 flex items-center justify-center">
+        <a className="bg-[#C7F6C7] text-2xl w-30 h-20 flex items-center justify-center">
           SPEED
         </a>
       </div>
 
       <div className="flex gap-6">
-        <ul className="flex gap-6 menu menu-horizontal px-1">
+  
+        <ul className="menu menu-horizontal">
           <li>
             <Link href="/dashboard">
               Dashboard
@@ -51,6 +52,7 @@ const Navbar: React.FC = () => {
             </details>
           </li>
         </ul>
+        
       </div>
     </div>
   );
