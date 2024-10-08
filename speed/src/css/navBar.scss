@@ -1,0 +1,62 @@
+.navbar {
+ // background-color: $base-100; // Ensure $base-100 is defined
+  font-family: 'Courier New', monospace;
+
+  .flex-1 {
+    a {
+      background-color: #C7F6C7;
+      font-size: 5rem;
+      width: 20rem;
+      height: 6rem;
+      display: center;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+ 
+  .menu {
+    display: flex;
+    gap: 1.5rem;
+
+    li {
+      list-style: none;
+
+      
+        &:hover {
+          background-color: darken(rgb(180, 180, 180), 10%);
+        }
+      }
+
+      details {
+        .nav-link {
+          cursor: pointer;
+        }
+
+        .dropdown-content {
+         // background-color: $base-100;
+          padding: 0.5rem;
+
+          .dropdown-link {
+            background-color: gray;
+            color: black;
+            width: 5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 0.625rem;
+
+            &:hover {
+              background-color: darken(gray, 10%);
+            }
+          }
+
+          .dropdown-link:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+
