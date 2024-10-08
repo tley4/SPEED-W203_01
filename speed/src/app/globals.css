@@ -20,6 +20,72 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+h1 {
+  text-align: center;
+}
+
+/* Style for article submission form */
+.article-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.form-field {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-bottom: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #e4e4e4;
+  color: var(--foreground);
+  font-size: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  appearance: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  border-bottom-color: blue;
+  outline: none;
+}
+
+.form-label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 1rem;
+  color: #999;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus + .form-label,
+.form-input:not(:placeholder-shown) + .form-label {
+  transform: translateY(-20px);
+  font-size: 0.875rem;
+  color: blue;
+}
+
+.submit-button {
+  background-color: #a1e191;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #58cd5c;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
