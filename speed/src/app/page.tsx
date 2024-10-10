@@ -15,9 +15,11 @@ export default function HomePage() {
   }, []);
 
   const handleLogout = () => {
-    // Remove the login status from localStorage
+    // Remove the token from cookies
+    document.cookie = 'token=; path=/; max-age=0'; // Clear the token
+  
     localStorage.removeItem('loggedIn');
-    router.push('/login'); // Redirect to the login page after logout
+    router.push('/login'); // Redirect to the login page
   };
 
   return (

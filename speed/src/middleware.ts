@@ -2,9 +2,9 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const token = request.cookies.get('token'); // Example: Check for a token or session
+  const token = request.cookies.get('token'); // Check for a token in the cookies
 
-  // If there's no token and the user is not on the login page or the home page, redirect to login
+  // If no token is found, redirect to the login page unless on /login or /
   if (!token && !request.nextUrl.pathname.startsWith('/login') && request.nextUrl.pathname !== '/') {
     return NextResponse.redirect(new URL('/login', request.url));
   }
@@ -22,5 +22,5 @@ export const config = {
     '/analyse_article/:path*',
     '/moderate_article/:path*',
     '/',
-  ], 
+  ],
 };

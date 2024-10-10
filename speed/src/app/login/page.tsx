@@ -33,6 +33,12 @@ export default function Auth() {
       });
 
       if (res.ok) {
+        // Assume the backend returns a token in the response body
+        const { token } = await res.json();
+      
+        // Store the token in the cookies with a simple expiry
+        document.cookie = `token=${token}; path=/; max-age=3600`; // Token valid for 1 hour
+      
         localStorage.setItem('loggedIn', 'true');
         router.push('/'); // Redirect after successful login/signup
       } else {
