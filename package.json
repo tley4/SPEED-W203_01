@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "@nestjs/cli": "^10.4.5",
-    "concurrently": "^9.0.1"
+    "daisyui": "^4.12.13",
+    "sass": "^1.79.4"
   },
   "name": "root-project",
   "version": "1.0.0",
@@ -9,6 +10,6 @@
     "start": "concurrently \"npm run dev --prefix speed\" \"npm start --prefix backend\""
   },
   "devDependencies": {
-    "concurrently": "^8.0.1"
+    "concurrently": "^8.2.2"
   }
 }
