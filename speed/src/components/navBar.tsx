@@ -15,6 +15,11 @@ const Navbar: React.FC = () => {
   
         <ul className="menu menu-horizontal">
           <li>
+            <Link href="/">
+              Home
+            </Link>
+          </li>
+          <li>
             <Link href="/dashboard">
               Dashboard
             </Link>
