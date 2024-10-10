@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import '../../css/auth.css'; // Adjust the path based on your file structure
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
@@ -18,7 +19,6 @@ export default function Auth() {
       return;
     }
 
-    // Update the endpoint to match your backend server's URL and port
     const endpoint = isLogin
       ? 'http://localhost:5000/api/login'
       : 'http://localhost:5000/api/signup';
@@ -33,7 +33,6 @@ export default function Auth() {
       });
 
       if (res.ok) {
-        // Store a flag in local storage indicating that the user is logged in
         localStorage.setItem('loggedIn', 'true');
         router.push('/'); // Redirect after successful login/signup
       } else {
@@ -46,11 +45,11 @@ export default function Auth() {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      <form onSubmit={handleSubmit} style={{ maxWidth: '400px', padding: '20px', border: '1px solid #ccc', borderRadius: '8px' }}>
+    <div className="auth-container">
+      <form className="auth-form" onSubmit={handleSubmit}>
         <h2>{isLogin ? 'Login' : 'Sign Up'}</h2>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <div style={{ marginBottom: '10px' }}>
+        {error && <p className="error-message">{error}</p>}
+        <div className="form-group">
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -60,7 +59,7 @@ export default function Auth() {
             required
           />
         </div>
-        <div style={{ marginBottom: '10px' }}>
+        <div className="form-group">
           <label htmlFor="password">Password:</label>
           <input
             type="password"
@@ -70,13 +69,19 @@ export default function Auth() {
             required
           />
         </div>
-        <button type="submit">{isLogin ? 'Login' : 'Sign Up'}</button>
-        <p style={{ marginTop: '10px' }}>
-          {isLogin ? 'Don\'t have an account?' : 'Already have an account?'}{' '}
-          <button type="button" onClick={() => setIsLogin(!isLogin)} style={{ background: 'none', color: 'blue', cursor: 'pointer' }}>
+        <button type="submit" className="auth-button">
+          {isLogin ? 'Login' : 'Sign Up'}
+        </button>
+        <div className="account-switch">
+          {isLogin ? "Don't have an account?" : 'Already have an account?'}{' '}
+          <button
+            type="button"
+            onClick={() => setIsLogin(!isLogin)}
+            className="toggle-button"
+          >
             {isLogin ? 'Sign Up' : 'Login'}
           </button>
-        </p>
+        </div>
       </form>
     </div>
   );
