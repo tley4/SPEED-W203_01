@@ -18,7 +18,10 @@ export default function Auth() {
       return;
     }
 
-    const endpoint = isLogin ? '/api/login' : '/api/signup';
+    // Update the endpoint to match your backend server's URL and port
+    const endpoint = isLogin
+      ? 'http://localhost:5000/api/login'
+      : 'http://localhost:5000/api/signup';
 
     try {
       const res = await fetch(endpoint, {
@@ -30,7 +33,9 @@ export default function Auth() {
       });
 
       if (res.ok) {
-        router.push('/dashboard'); // Redirect after successful login/signup
+        // Store a flag in local storage indicating that the user is logged in
+        localStorage.setItem('loggedIn', 'true');
+        router.push('/'); // Redirect after successful login/signup
       } else {
         const { message } = await res.json();
         setError(message || 'An error occurred. Please try again.');
