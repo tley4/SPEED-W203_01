@@ -1,5 +1,14 @@
 {
   "dependencies": {
-    "@nestjs/cli": "^10.4.5"
+    "@nestjs/cli": "^10.4.5",
+    "concurrently": "^9.0.1"
+  },
+  "name": "root-project",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "concurrently \"npm run dev --prefix speed\" \"npm start --prefix backend\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.1"
   }
 }
