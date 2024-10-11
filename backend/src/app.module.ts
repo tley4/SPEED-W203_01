@@ -4,7 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module'; // Import the AuthModule
-import { ArticleModule } from './submission/article.module'; //Import ArticleModule
+import { ArticlesModule } from './articles/articles.module';
 
 @Module({
   imports: [
@@ -13,7 +13,7 @@ import { ArticleModule } from './submission/article.module'; //Import ArticleMod
     }),
     MongooseModule.forRoot(process.env.MONGODB_URI), // Use environment variable for MongoDB connection
     AuthModule, // Add AuthModule to imports
-    ArticleModule
+    ArticlesModule
   ],
   controllers: [AppController],
   providers: [AppService],

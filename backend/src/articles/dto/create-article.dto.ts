@@ -1,10 +1,9 @@
-// create-article.dto.ts
 export class CreateArticleDto {
     title: string;
     abstract: string;
-    doi?: string;
+    doi?: string; // Optional field
     keywords: string;
     articleType: string;
-    publicationDate: Date;
+    publicationDate: string; // Store as a string or Date, depending the your schema
     author: string;
-  }  
+  }
