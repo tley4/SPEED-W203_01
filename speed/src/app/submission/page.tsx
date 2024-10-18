@@ -7,7 +7,7 @@ const page = () => {
     title: '',
     abstract: '',
     doi: '',
-    keywords: '',
+    sePractice: '',
     articleType: '',
     publicationDate: '',
     author: '',
@@ -92,16 +92,16 @@ const page = () => {
         <div className="form-field">
           <input
             type="text"
-            name="keywords"
-            id="floating_keywords"
-            value={formData.keywords}
+            name="sePractice"
+            id="floating_sePractice"
+            value={formData.sePractice}
             onChange={handleChange}
             className="form-input"
             placeholder=" "
             required
           />
           <label htmlFor="floating_keywords" className="form-label">
-            Keywords
+            Software Engineering Practice
           </label>
         </div>
 

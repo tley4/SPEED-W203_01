@@ -13,7 +13,7 @@ export class Article extends Document {
   doi: string;
 
   @Prop({ required: true })
-  keywords: string;
+  sePractice: string;
 
   @Prop({ required: true })
   articleType: string;
