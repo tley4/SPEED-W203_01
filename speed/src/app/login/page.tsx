@@ -13,8 +13,8 @@ export default function Auth() {
 
   // Use the environment variable for API URL
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  const loginEndPoint = `${apiUrl}/api/login`; // Use the environment variable in the API call
-  const signUpEndPoint = `${apiUrl}/api/signup`; 
+  const loginEndPoint = `${apiUrl}api/login`; // Use the environment variable in the API call
+  const signUpEndPoint = `${apiUrl}api/signup`; 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
