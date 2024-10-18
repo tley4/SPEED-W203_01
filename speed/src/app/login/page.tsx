@@ -33,10 +33,6 @@ export default function Auth() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
-<<<<<<< Updated upstream
-=======
-        credentials: 'include', // If you're using cookies or tokens
->>>>>>> Stashed changes
       });
 
       if (res.ok) {
@@ -54,6 +50,8 @@ export default function Auth() {
       }
     } catch (error) {
       setError('Something went wrong. Please try again later.');
+      console.log("API URL:", apiUrl);
+      console.log(error);
     }
   };
 
