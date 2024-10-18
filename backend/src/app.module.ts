@@ -1,19 +1,21 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
+import { AuthModule } from './auth/auth.module';
+import { ArticlesModule } from './articles/articles.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module'; // Import the AuthModule
-import { ArticlesModule } from './articles/articles.module';
+import { join } from 'path'; // Import `join` to handle the path for the .env file
 
 @Module({
   imports: [
     ConfigModule.forRoot({
+      envFilePath: join(__dirname, '..', '..', '.env'), // Specify the path to the .env file in the project root
       isGlobal: true, // Makes the ConfigModule available globally
     }),
-    MongooseModule.forRoot(process.env.MONGODB_URI), // Use environment variable for MongoDB connection
+    MongooseModule.forRoot(process.env.MONGODB_URI), // Use the environment variable for MongoDB connection
     AuthModule, // Add AuthModule to imports
-    ArticlesModule
+    ArticlesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

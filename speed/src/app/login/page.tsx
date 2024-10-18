@@ -11,6 +11,11 @@ export default function Auth() {
   const [error, setError] = useState('');
   const router = useRouter();
 
+  // Use the environment variable for API URL
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const loginEndPoint = `${apiUrl}/api/login`; // Use the environment variable in the API call
+  const signUpEndPoint = `${apiUrl}/api/signup`; 
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -19,9 +24,7 @@ export default function Auth() {
       return;
     }
 
-    const endpoint = isLogin
-      ? 'http://localhost:5000/api/login'
-      : 'http://localhost:5000/api/signup';
+    const endpoint = isLogin ? loginEndPoint : signUpEndPoint; // Use the correct endpoint based on action
 
     try {
       const res = await fetch(endpoint, {
@@ -30,6 +33,10 @@ export default function Auth() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
+<<<<<<< Updated upstream
+=======
+        credentials: 'include', // If you're using cookies or tokens
+>>>>>>> Stashed changes
       });
 
       if (res.ok) {
@@ -73,6 +80,7 @@ export default function Auth() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            autoComplete="current-password"
           />
         </div>
         <button type="submit" className="auth-button">
