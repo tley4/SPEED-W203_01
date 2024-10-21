@@ -1,9 +1,13 @@
-import React from 'react'
 
-const page = () => {
+"use client";
+
+const ModerateArticlePage = () => {
   return (
-    <div>this page will display list of articles needing moderation</div>
-  )
-}
+    <div>
+      <h1>Moderation Dashboard</h1>
+      {/* Page content here */}
+    </div>
+  );
+};
 
-export default page
+export default ModerateArticlePage;

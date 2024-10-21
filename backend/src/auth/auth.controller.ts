@@ -8,14 +8,14 @@ export class AuthController {
 
   @Post('signup')
   async signup(@Body() signupDto: SignupDto) {
-    const { email, password } = signupDto;
+    const { email, password, role } = signupDto; 
 
     if (!email || !password) {
       throw new BadRequestException('Email and password are required');
     }
 
     try {
-      return await this.authService.signup(email, password);
+      return await this.authService.signup(email, password, role);
     } catch (error) {
       if (error.message === 'User already exists') {
         throw new ConflictException('User already exists');
