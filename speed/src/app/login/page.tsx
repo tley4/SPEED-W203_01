@@ -18,14 +18,14 @@ export default function Auth() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+  
     if (!email || !password) {
       setError('Please fill in both fields.');
       return;
     }
-
+  
     const endpoint = isLogin ? loginEndPoint : signUpEndPoint; // Use the correct endpoint based on action
-
+  
     try {
       const res = await fetch(endpoint, {
         method: 'POST',
@@ -33,17 +33,22 @@ export default function Auth() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
-        credentials: 'include'
       });
-
+  
       if (res.ok) {
-        // Assume the backend returns a token in the response body
-        const { token } = await res.json();
-      
+        // Assume the backend returns both token and role in the response body
+        const { token, role } = await res.json();
+        
         // Store the token in the cookies with a simple expiry
         document.cookie = `token=${token}; path=/; max-age=3600`; // Token valid for 1 hour
-      
+        document.cookie = `role=${role}; path=/; max-age=3600`; // Role cookie
+  
+        // Store loggedIn status and role in localStorage
         localStorage.setItem('loggedIn', 'true');
+        localStorage.setItem('role', role);  // Store the role in localStorage too
+  
+        console.log("Role set after login:", role);
+        
         router.push('/'); // Redirect after successful login/signup
       } else {
         const { message } = await res.json();

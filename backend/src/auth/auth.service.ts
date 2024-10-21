@@ -11,7 +11,8 @@ export class AuthService {
     this.client = new MongoClient(process.env.MONGODB_URI!);
   }
 
-  async signup(email: string, password: string) {
+  async signup(email: string, password: string, role: string = 'user') {
+    // Default role to 'user'
     await this.client.connect();
     const db = this.client.db(this.dbName);
     const usersCollection = db.collection('users');
@@ -25,8 +26,10 @@ export class AuthService {
     await usersCollection.insertOne({
       email,
       password: hashedPassword,
+      role,
       createdAt: new Date(),
     });
+
     await this.client.close();
     return { message: 'User created successfully' };
   }
@@ -47,6 +50,8 @@ export class AuthService {
     }
 
     await this.client.close();
-    return { message: 'Login successful' };
+
+    // Assuming you return the user role here:
+    return { message: 'Login successful', role: user.role };
   }
 }
