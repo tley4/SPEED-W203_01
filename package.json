@@ -1,5 +1,15 @@
 {
   "dependencies": {
-    "@nestjs/cli": "^10.4.5"
+    "@nestjs/cli": "^10.4.5",
+    "daisyui": "^4.12.13",
+    "sass": "^1.79.4"
+  },
+  "name": "root-project",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "concurrently \"npm run dev --prefix speed\" \"npm start --prefix backend\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   }
 }
