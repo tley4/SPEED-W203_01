@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import "../../css/Articles.css";
 
 // Define the structure of an article
 interface Article {
@@ -65,25 +66,28 @@ const Articles = () => {
   };
 
   return (
-    <div>
-      <h1>Articles List</h1>
+    <div className="articles-container">
+      <h1>Moderate Articles</h1>
+      {/* Conditionally render message if no articles are found */}
       {articles.length === 0 ? (
         <p>No articles found.</p>
       ) : (
-        <ul>
+        <ul className="article-list">
+          {/* Iterate through the list of articles */}
           {articles.map((article) => (
-            <li key={article._id}>
-              <h3>{article.title}</h3>
-              <p>{article.abstract}</p>
-              <p>Status: {article.status}</p>
-              {/* Show dropdown and button if the article is pending */}
+            <li key={article._id} className="article-item">
+              <div className="article-details">
+                <h3>{article.title}</h3>
+                <p>{article.abstract}</p>
+                <p>Status: <strong>{article.status}</strong></p>
+              </div>
+              {/* Show dropdown and submit button only for pending articles */}
               {article.status === "pending" && (
-                <>
+                <div className="article-actions">
                   <select
                     value={action[article._id] || ""}
-                    onChange={(e) =>
-                      handleActionChange(article._id, e.target.value)
-                    }
+                    onChange={(e) => handleActionChange(article._id, e.target.value)}
+                    className="action-select"
                   >
                     <option value="">Select an action</option>
                     <option value="approve">Approve</option>
@@ -92,10 +96,11 @@ const Articles = () => {
                   <button
                     onClick={() => handleActionSubmit(article._id)}
                     disabled={!action[article._id]} // Disable button if no action is selected
+                    className="submit-btn"
                   >
                     Submit
                   </button>
-                </>
+                </div>
               )}
             </li>
           ))}
