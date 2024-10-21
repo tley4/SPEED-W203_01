@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../css/Articles.css';
+import ArticleApproval from './articleApproval';  // Import the ArticleApproval component
 
 // Define the structure of an article
 interface Article {
@@ -15,7 +16,7 @@ interface Article {
   publicationDate: string;
   author: string;
   createdAt: Date;
-  moderationStatus: string;
+  moderationStatus: string;  // Use moderationStatus instead of status
 }
 
 const ArticlesPage = () => {
@@ -62,7 +63,12 @@ const ArticlesPage = () => {
                 <p>{article.abstract}</p>
                 <p><strong>Author:</strong> {article.author}</p>
                 <p><strong>Published on:</strong> {new Date(article.publicationDate).toLocaleDateString()}</p>
-                <p><strong>Status:</strong> {article.moderationStatus}</p>
+                {/* Replace moderation status with ArticleApproval component */}
+                {article.moderationStatus === 'pending' ? (
+                  <ArticleApproval articleId={article._id} currentStatus={article.moderationStatus} onUpdate={fetchArticles} />
+                ) : (
+                  <p><strong>Status:</strong> {article.moderationStatus}</p>
+                )}
               </div>
             </li>
           ))}
