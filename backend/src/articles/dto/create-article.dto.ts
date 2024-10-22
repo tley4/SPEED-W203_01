@@ -9,4 +9,6 @@ export class CreateArticleDto {
   author: string;
   createdAt: Date;
   status: string;
+  analystComment?: string;
+  isSubmitted: boolean;
 }
