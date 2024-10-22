@@ -73,4 +73,9 @@ export class ArticlesController {
   async getApprovedArticles() {
     return this.articlesService.findApproved();
   }
+
+  @Get('submitted')
+  async getSubmittedArticles() {
+    return this.articlesService.findSubmittedArticles();
+  }
 }

@@ -70,7 +70,10 @@ export class ArticlesService {
     );
   }
 
-  async analystSubmitArticle(articleId: string, analystComment: string): Promise<Article> {
+  async analystSubmitArticle(
+    articleId: string,
+    analystComment: string,
+  ): Promise<Article> {
     return await this.articleModel.findByIdAndUpdate(
       articleId,
       { analystComment: analystComment, isSubmitted: true },
@@ -79,6 +82,12 @@ export class ArticlesService {
   }
 
   async findApproved(): Promise<Article[]> {
-    return this.articleModel.find({ moderationStatus: 'approved', isSubmitted: false }).exec();
+    return this.articleModel
+      .find({ moderationStatus: 'approved', isSubmitted: false })
+      .exec();
+  }
+
+  async findSubmittedArticles(): Promise<Article[]> {
+    return this.articleModel.find({ isSubmitted: true }).exec();
   }
 }
