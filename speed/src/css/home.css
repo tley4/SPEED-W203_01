@@ -1,46 +1,48 @@
 /* src/css/home.css */
 .home-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: #f0f4f8;
-  }
-  
-  .home-content {
-    max-width: 600px;
-    width: 100%;
-    padding: 30px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  .home-content h1 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
-  }
-  
-  .home-content p {
-    margin-bottom: 15px;
-    font-size: 18px;
-    color: #555;
-  }
-  
-  .home-button {
-    padding: 10px 20px;
-    border-radius: 5px;
-    background: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    font-size: 16px;
-  }
-  
-  .home-button:hover {
-    background: #0056b3;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("../images/stacked-waves-haikei.svg");
+  background-size: cover; /* Ensures the image covers the container */
+  background-position: center; /* Centers the background image */
+  background-repeat: no-repeat; /* Prevents the background from repeating */
+  overflow: hidden; /* Prevents scrollbars */
+}
+.home-content {
+  max-width: 600px;
+  width: 100%;
+  padding: 30px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.home-content h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.home-content p {
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #555;
+}
+
+.home-button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-size: 16px;
+}
+
+.home-button:hover {
+  background: #0056b3;
+}
