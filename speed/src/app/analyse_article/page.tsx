@@ -60,53 +60,56 @@ const AnalystPage = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="articles-container">
-      <h1>Approved Articles for Analyst Review</h1>
-      {articles.length > 0 ? (
-        <ul className="article-list">
-          {articles.map((article) => (
-            <li key={article._id} className="article-item">
-              <div className="article-content">
-                <h3><strong>Title:</strong> {article.title}</h3>
-                <p><strong>Abstract:</strong> {article.abstract}</p>
-                <p><strong>DOI:</strong> {article.doi || 'N/A'}</p>
-                <p><strong>Keywords:</strong> {article.keywords || 'N/A'}</p>
-                <p><strong>Type:</strong> {article.articleType}</p>
-                <p><strong>Published on:</strong> {new Date(article.publicationDate).toLocaleDateString()}</p>
-                <p><strong>Author:</strong> {article.author}</p>
-                <button 
-                  className="submit-btn" 
-                  onClick={() => setSelectedArticle(article)}
-                >
-                  Review
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No approved articles found for review.</p>
-      )}
+    <div className='articles-body'>
+        <div className="articles-container">
+          <h1>Approved Articles for Analyst Review</h1>
+          {articles.length > 0 ? (
+            <ul className="article-list">
+              {articles.map((article) => (
+                <li key={article._id} className="article-item">
+                  <div className="article-content">
+                    <h3><strong>Title:</strong> {article.title}</h3>
+                    <p><strong>Abstract:</strong> {article.abstract}</p>
+                    <p><strong>DOI:</strong> {article.doi || 'N/A'}</p>
+                    <p><strong>Keywords:</strong> {article.keywords || 'N/A'}</p>
+                    <p><strong>Type:</strong> {article.articleType}</p>
+                    <p><strong>Published on:</strong> {new Date(article.publicationDate).toLocaleDateString()}</p>
+                    <p><strong>Author:</strong> {article.author}</p>
+                    <button 
+                      className="submit-btn" 
+                      onClick={() => setSelectedArticle(article)}
+                    >
+                      Review
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No approved articles found for review.</p>
+          )}
 
-      {selectedArticle && (
-        <div className="article-review-form">
-          <h2>Reviewing: {selectedArticle.title}</h2>
-          <textarea
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            placeholder="Add additional comments here"
-            className="comment-box"
-          />
-          <button
-            onClick={() => handleSubmit(selectedArticle._id)}
-            className="submit-btn"
-            disabled={!comment}
-          >
-            Submit Article
-          </button>
+          {selectedArticle && (
+            <div className="article-review-form">
+              <h2>Reviewing: {selectedArticle.title}</h2>
+              <textarea
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                placeholder="Add additional comments here"
+                className="comment-box"
+              />
+              <button
+                onClick={() => handleSubmit(selectedArticle._id)}
+                className="submit-btn"
+                disabled={!comment}
+              >
+                Submit Article
+              </button>
+            </div>
+          )}
         </div>
-      )}
     </div>
+    
   );
 };
 
