@@ -30,13 +30,13 @@ const ArticlesPage = () => {
     fetchArticles();
   }, []);
 
-  // Fetch articles from backend
+  // Fetch only pending articles from backend
   const fetchArticles = async () => {
     try {
-      const response = await axios.get<Article[]>('http://localhost:5000/articles');
+      const response = await axios.get<Article[]>('http://localhost:5000/articles/pending'); // Use the pending endpoint
       setArticles(response.data);
     } catch (error) {
-      console.error('Error fetching articles:', error);
+      console.error('Error fetching pending articles:', error);
       setError('Failed to fetch articles');
     } finally {
       setLoading(false); // Stop loading after fetching or on error
@@ -51,30 +51,44 @@ const ArticlesPage = () => {
 
   return (
     <div className="articles-container">
-      <h1>Articles List</h1>
+      <h1>Pending Articles for Moderation</h1>
       {/* Conditionally render list of articles or message if none found */}
       {articles.length > 0 ? (
         <ul className="article-list">
           {/* Map through the list of articles */}
           {articles.map((article) => (
             <li key={article._id} className="article-item">
-              <div className="article-details">
-                <h3>{article.title}</h3>
-                <p>{article.abstract}</p>
+              {/* Article content area */}
+              <div className="article-content">
+                <h3><strong>Article Title:</strong> {article.title}</h3>
+                <p><strong>Abstract:</strong> {article.abstract}</p>
+                <p><strong>DOI:</strong> {article.doi || 'N/A'}</p>
+                <p><strong>SE Practise:</strong> {article.keywords || 'N/A'}</p>
+                <p><strong>Article Type:</strong> {article.articleType}</p>
                 <p><strong>Author:</strong> {article.author}</p>
                 <p><strong>Published on:</strong> {new Date(article.publicationDate).toLocaleDateString()}</p>
-                {/* Replace moderation status with ArticleApproval component */}
+                <p><strong>Created at:</strong> {new Date(article.createdAt).toLocaleDateString()}</p>
+              </div>
+
+              {/* Article actions area */}
+              <div className="article-actions-container">
+                {/* Display moderation status */}
+                <p className="article-status">
+                  <strong>Status:</strong>
+                </p>
+
+                {/* Save or approve buttons */}
                 {article.moderationStatus === 'pending' ? (
                   <ArticleApproval articleId={article._id} currentStatus={article.moderationStatus} onUpdate={fetchArticles} />
                 ) : (
-                  <p><strong>Status:</strong> {article.moderationStatus}</p>
+                  <button className="submit-btn">Save</button>
                 )}
               </div>
             </li>
           ))}
         </ul>
       ) : (
-        <p>No articles found.</p>
+        <p>No pending articles found.</p>
       )}
     </div>
   );
