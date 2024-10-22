@@ -1,13 +1,29 @@
-import { Controller, Get, Post, Body, Patch, Param } from '@nestjs/common';
+import { Controller, Get, Post, Query, Body } from '@nestjs/common';
 import { ArticlesService } from './articles.service';
 import { CreateArticleDto } from './dto/create-article.dto';
-import { Article } from './schemas/article.schema'; // Import your Article schema
 
 @Controller('articles')
 export class ArticlesController {
   constructor(private readonly articlesService: ArticlesService) {}
 
-  // Submit an article
+  @Get()
+  async findAll() {
+    return this.articlesService.findAll();
+  }
+
+  @Get('search')
+  async searchArticles(
+    @Query('title') title: string,
+    @Query('sePractice') sePractice: string,
+    @Query('publicationYear') publicationYear: string,
+  ) {
+    return this.articlesService.searchArticles(
+      title,
+      sePractice,
+      publicationYear,
+    );
+  }
+
   @Post('submit')
   async submitArticle(@Body() createArticleDto: CreateArticleDto) {
     return this.articlesService.create(createArticleDto);
@@ -40,7 +56,7 @@ export class ArticlesController {
   @Patch(':id/analyst-submit')
   async analystSubmitArticle(
     @Param('id') id: string,
-    @Body('analystComment') analystComment: string
+    @Body('analystComment') analystComment: string,
   ) {
     return this.articlesService.analystSubmitArticle(id, analystComment); // Use the renamed service method
   }
@@ -49,5 +65,4 @@ export class ArticlesController {
   async getApprovedArticles() {
     return this.articlesService.findApproved();
   }
-
 }

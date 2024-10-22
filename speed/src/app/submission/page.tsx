@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-const page = () => {
+const SubmissionPage = () => {
   const [formData, setFormData] = useState({
     title: '',
     abstract: '',
@@ -166,4 +166,4 @@ const page = () => {
   );  
 }
 
-export default page
+export default SubmissionPage
