@@ -1,29 +1,48 @@
 import { Injectable } from '@nestjs/common';
-import { MongoClient } from 'mongodb';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Article } from './schemas/article.schema';
 import { CreateArticleDto } from './dto/create-article.dto';
 
 @Injectable()
 export class ArticlesService {
-  private readonly client: MongoClient;
-  private readonly dbName = 'speedDatabase'; // Specify the database name here
+  constructor(
+    @InjectModel(Article.name) private articleModel: Model<Article>,
+  ) {}
 
-  constructor() {
-    this.client = new MongoClient(process.env.MONGODB_URI!);
+  async findAll(): Promise<Article[]> {
+    return this.articleModel.find().exec(); // Fetch all articles
   }
 
-  async create(createArticleDto: CreateArticleDto) {
-    await this.client.connect();
-    const db = this.client.db(this.dbName); // Use the specified database
-    const articlesCollection = db.collection('articles');
+  // Fetch only pending articles based on moderationStatus
+  async findPending(): Promise<Article[]> {
+    return this.articleModel.find({ moderationStatus: 'pending' }).exec();
+  }
 
-    const newArticle = {
+  async create(createArticleDto: CreateArticleDto): Promise<Article> {
+    const newArticle = new this.articleModel({
       ...createArticleDto,
+      moderationStatus: 'pending', // Ensure this is set to pending during creation
       createdAt: new Date(),
-    };
+    });
+    return await newArticle.save();
+  }
 
-    const result = await articlesCollection.insertOne(newArticle);
-    await this.client.close();
+  // Approve an article by updating the moderationStatus
+  async approveArticle(articleId: string): Promise<Article> {
+    return await this.articleModel.findByIdAndUpdate(
+      articleId,
+      { moderationStatus: 'approved' },
+      { new: true },
+    );
+  }
 
-    return { message: 'Article submitted successfully', articleId: result.insertedId };
+  // Reject an article by updating the moderationStatus
+  async rejectArticle(articleId: string): Promise<Article> {
+    return await this.articleModel.findByIdAndUpdate(
+      articleId,
+      { moderationStatus: 'rejected' },
+      { new: true },
+    );
   }
 }

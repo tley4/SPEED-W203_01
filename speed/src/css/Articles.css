@@ -1,0 +1,84 @@
+.articles-container {
+  padding: 20px;
+  background-color: #f5f7fa; /* Match the homepage background */
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  font-size: xx-large;
+  font-weight: bolder;
+}
+
+/* Define a responsive grid layout for the article list */
+.article-list {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(250px, 1fr)
+  ); /* Responsive columns */
+  gap: 20px; /* Space between grid items */
+  padding: 0;
+  max-width: 100%; /* Full-width */
+  margin: 0 auto; /* Center the grid container */
+  list-style: none;
+}
+
+.article-item {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Keep the subtle shadow effect */
+  justify-content: space-between; /* Ensure content fills the available space */
+}
+
+/* Separate article details and actions into two areas */
+.article-content {
+  flex-grow: 1;
+  margin-bottom: 15px; /* Space between content and actions */
+}
+
+.article-actions-container {
+  display: flex;
+  justify-content: center; /* Center the content horizontally */
+  align-items: center;
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid #ddd; /* Adds a border between content and actions */
+}
+
+/* Buttons and status styling */
+.article-status {
+  font-weight: bold;
+  color: #333;
+}
+
+.action-select {
+  padding: 5px;
+  font-size: 16px;
+  background-color: white;
+}
+
+.submit-btn {
+  padding: 10px 15px;
+  background-color: #007bff; /* Match button color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}

@@ -6,19 +6,31 @@ import '../css/home.css'; // Adjust the path based on your file structure
 
 export default function HomePage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userRole, setUserRole] = useState('');  // Add state for user role
   const router = useRouter();
 
   useEffect(() => {
-    // Check if the user is logged in by reading the flag from localStorage
     const loggedInStatus = localStorage.getItem('loggedIn');
+    const role = localStorage.getItem('role');
+  
+    // If not logged in or no role, redirect to login page
+    if (!loggedInStatus || !role) {
+      router.push('/login');
+      return;
+    }
+  
     setIsLoggedIn(loggedInStatus === 'true');
+    setUserRole(role);
   }, []);
 
   const handleLogout = () => {
-    // Remove the token from cookies
-    document.cookie = 'token=; path=/; max-age=0'; // Clear the token
-  
+    // Remove the token and role from cookies and localStorage
+    document.cookie = 'token=; path=/; max-age=0';  // Clear the token
+    document.cookie = 'role=; path=/; max-age=0';   // Clear the role from cookies if you store it there
+
     localStorage.removeItem('loggedIn');
+    localStorage.removeItem('role');  // Clear the role from localStorage
+
     router.push('/login'); // Redirect to the login page
   };
 
@@ -29,6 +41,7 @@ export default function HomePage() {
         {isLoggedIn ? (
           <>
             <p>You are logged in!</p>
+            <p>Your role: {userRole}</p> {/* Display user role */}
             <button className="home-button" onClick={handleLogout}>
               Logout
             </button>
