@@ -1,4 +1,3 @@
-/* Container for articles */
 .articles-body {
   background-image: url("../images/stacked-waves-haikei.svg");
   background-size: cover;
@@ -6,58 +5,52 @@
   background-repeat: no-repeat;
   margin: 0;
   padding: 50px;
-  height: 100vh; /* Make sure body takes full height of viewport */
-  font-family: 'Arial', sans-serif;
+  height: 100vh;
+  font-family: "Arial", sans-serif;
 }
 
 .articles-container {
   padding: 20px;
   max-width: 900px;
   margin: 0 auto;
-  background-color: #f9f9f9;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  
 }
 
-/* Title for the page */
 h1 {
   font-size: 28px;
   text-align: center;
   margin-bottom: 30px;
-  font-family: 'Helvetica', sans-serif;
+  font-family: "Helvetica", sans-serif;
 }
 
-/* List styling for articles */
 .article-list {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
-/* Individual article item styling */
 .article-item {
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.4);
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Article content styling */
 .article-content {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
-/* Bold styling for strong tags */
 .article-content strong {
   font-weight: bold;
   font-size: 16px;
 }
 
-/* Button for review action */
 .submit-btn {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -72,13 +65,11 @@ h1 {
   background-color: #45a049;
 }
 
-/* Disable button styling */
 .submit-btn:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
 
-/* Comment box */
 .comment-box {
   width: 100%;
   height: 150px;
@@ -86,11 +77,12 @@ h1 {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   font-size: 14px;
+  background-color: white;
+  color: black;
 }
 
-/* Styling for the review form */
 .article-review-form {
   background-color: #fff;
   padding: 20px;
@@ -99,14 +91,12 @@ h1 {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Text styling for review message */
 .article-review-form h2 {
-  font-family: 'Helvetica', sans-serif;
+  font-family: "Helvetica", sans-serif;
   font-size: 20px;
   margin-bottom: 10px;
 }
 
-/* Additional styling for article details */
 .article-content h3 {
   margin-bottom: 10px;
   font-size: 18px;
@@ -130,13 +120,11 @@ h1 {
   margin-bottom: 10px;
 }
 
-/* Centering content on the page */
 .article-actions-container {
   text-align: center;
   margin-top: 20px;
 }
 
-/* Adjust padding and alignment */
 textarea {
   font-size: 14px;
   padding: 10px;

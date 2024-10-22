@@ -1,0 +1,57 @@
+.navbar {
+  font-family: "Courier New", monospace;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.flex-1 a {
+  background-color: rgba(255, 255, 255, 0.5);
+  font-size: 5rem;
+  width: 20rem;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.menu li {
+  list-style: none;
+}
+
+.menu li:hover {
+  background-color: rgb(162, 162, 162);
+}
+
+.menu details .nav-link {
+  cursor: pointer;
+}
+
+.dropdown-content {
+  padding: 0.5rem;
+  background-color: whitesmoke;
+}
+
+.dropdown-content .dropdown-link {
+  background-color: whitesmoke;
+  color: black;
+  width: 5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 0.625rem;
+  border-radius: 5px;
+}
+
+.dropdown-content .dropdown-link:hover {
+  background-color: rgb(162, 162, 162);
+}
+
+.dropdown-content .dropdown-link:last-child {
+  margin-bottom: 0;
+}
