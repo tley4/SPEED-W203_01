@@ -45,4 +45,16 @@ export class ArticlesService {
       { new: true },
     );
   }
+
+  async analystSubmitArticle(articleId: string, analystComment: string): Promise<Article> {
+    return await this.articleModel.findByIdAndUpdate(
+      articleId,
+      { analystComment: analystComment, isSubmitted: true },
+      { new: true },
+    );
+  }
+
+  async findApproved(): Promise<Article[]> {
+    return this.articleModel.find({ moderationStatus: 'approved', isSubmitted: false }).exec();
+  }
 }

@@ -36,4 +36,18 @@ export class ArticlesController {
   async getPendingArticles() {
     return this.articlesService.findPending();
   }
+
+  @Patch(':id/analyst-submit')
+  async analystSubmitArticle(
+    @Param('id') id: string,
+    @Body('analystComment') analystComment: string
+  ) {
+    return this.articlesService.analystSubmitArticle(id, analystComment); // Use the renamed service method
+  }
+
+  @Get('approved')
+  async getApprovedArticles() {
+    return this.articlesService.findApproved();
+  }
+
 }

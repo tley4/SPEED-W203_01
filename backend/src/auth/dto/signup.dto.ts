@@ -1,5 +1,5 @@
 export class SignupDto {
   email: string;
   password: string;
-  role?: string;
+  role?: string = 'user';
 }

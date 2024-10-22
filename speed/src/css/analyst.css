@@ -1,0 +1,143 @@
+/* Container for articles */
+.articles-body {
+  background-image: url("../images/stacked-waves-haikei.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 50px;
+  height: 100vh; /* Make sure body takes full height of viewport */
+  font-family: 'Arial', sans-serif;
+}
+
+.articles-container {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+}
+
+/* Title for the page */
+h1 {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 30px;
+  font-family: 'Helvetica', sans-serif;
+}
+
+/* List styling for articles */
+.article-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Individual article item styling */
+.article-item {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Article content styling */
+.article-content {
+  font-family: 'Arial', sans-serif;
+}
+
+/* Bold styling for strong tags */
+.article-content strong {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Button for review action */
+.submit-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.submit-btn:hover {
+  background-color: #45a049;
+}
+
+/* Disable button styling */
+.submit-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Comment box */
+.comment-box {
+  width: 100%;
+  height: 150px;
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+}
+
+/* Styling for the review form */
+.article-review-form {
+  background-color: #fff;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Text styling for review message */
+.article-review-form h2 {
+  font-family: 'Helvetica', sans-serif;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* Additional styling for article details */
+.article-content h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+.article-content p {
+  margin-bottom: 8px;
+  line-height: 1.5;
+  color: #666;
+}
+
+.article-content p strong {
+  color: #333;
+  font-size: 16px;
+}
+
+.article-content .doi,
+.article-content .author,
+.article-content .keywords {
+  margin-bottom: 10px;
+}
+
+/* Centering content on the page */
+.article-actions-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Adjust padding and alignment */
+textarea {
+  font-size: 14px;
+  padding: 10px;
+}

@@ -29,6 +29,13 @@ export class Article extends Document {
 
   @Prop({ default: 'pending' }) // Default value set to 'pending'
   moderationStatus: string; // New moderation status field
+
+  @Prop()
+  analystComment?: string; // Field to store analyst's comments
+
+  @Prop({ default: false })
+  isSubmitted: boolean; // Indicates if the article has been finalized by an analyst
+
 }
 
 export const ArticleSchema = SchemaFactory.createForClass(Article);
