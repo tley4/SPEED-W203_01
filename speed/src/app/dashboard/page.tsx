@@ -13,6 +13,7 @@ interface Article {
   articleType: string;
   publicationDate: string;
   author: string;
+  averageRating: number | null; // Add averageRating field
 }
 
 const DashboardPage = () => {
@@ -138,6 +139,11 @@ const DashboardPage = () => {
               {/* Star Rating Component */}
               <div className="article-rating">
                 <h3><strong>Rating</strong></h3>
+                {article.averageRating !== null ? (
+                  <p><strong>Average Rating: </strong>{article.averageRating.toFixed(1)} / 5</p>
+                ) : (
+                  <p>No ratings yet</p>
+                )}
                 <StarRating articleId={article._id} />
               </div>
             </div>

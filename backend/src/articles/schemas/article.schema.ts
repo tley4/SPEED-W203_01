@@ -10,16 +10,16 @@ export class Article extends Document {
   abstract: string;
 
   @Prop({ required: false })
-  doi?: string; // Optional if not always present
+  doi?: string;
 
   @Prop({ required: false })
-  keywords?: string; // Optional if not always present
+  keywords?: string;
 
   @Prop({ required: true })
   articleType: string;
 
   @Prop({ required: true })
-  publicationDate: string; // Storing as string for now, convert to Date if needed
+  publicationDate: string;
 
   @Prop({ required: true })
   author: string;
@@ -27,15 +27,23 @@ export class Article extends Document {
   @Prop({ required: true })
   createdAt: Date;
 
-  @Prop({ default: 'pending' }) // Default value set to 'pending'
-  moderationStatus: string; // New moderation status field
+  @Prop({ default: 'pending' })
+  moderationStatus: string;
 
   @Prop()
-  analystComment?: string; // Field to store analyst's comments
+  analystComment?: string;
 
   @Prop({ default: false })
-  isSubmitted: boolean; // Indicates if the article has been finalized by an analyst
+  isSubmitted: boolean;
 
+  @Prop({ default: 0 })
+  ratingSum: number;
+
+  @Prop({ default: 0 })
+  ratingCount: number;
+
+  @Prop({ default: null })
+  averageRating: number | null;
 }
 
 export const ArticleSchema = SchemaFactory.createForClass(Article);

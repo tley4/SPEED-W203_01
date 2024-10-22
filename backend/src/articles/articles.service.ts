@@ -90,4 +90,31 @@ export class ArticlesService {
   async findSubmittedArticles(): Promise<Article[]> {
     return this.articleModel.find({ isSubmitted: true }).exec();
   }
+
+  async updateRating(articleId: string, newRating: number): Promise<Article> {
+    if (newRating < 1 || newRating > 5) {
+      throw new Error('Rating must be between 1 and 5'); // Ensure valid ratings
+    }
+
+    // Find the article
+    const article = await this.articleModel.findById(articleId);
+
+    // Update the ratingSum and ratingCount
+    const updatedRatingSum = article.ratingSum + newRating;
+    const updatedRatingCount = article.ratingCount + 1;
+
+    // Calculate the new average rating
+    const updatedAverageRating = updatedRatingSum / updatedRatingCount;
+
+    // Update the article with the new values
+    return await this.articleModel.findByIdAndUpdate(
+      articleId,
+      {
+        ratingSum: updatedRatingSum,
+        ratingCount: updatedRatingCount,
+        averageRating: updatedAverageRating,
+      },
+      { new: true }, // Return the updated document
+    );
+  }
 }

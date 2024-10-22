@@ -78,4 +78,9 @@ export class ArticlesController {
   async getSubmittedArticles() {
     return this.articlesService.findSubmittedArticles();
   }
+
+  @Patch(':id/rating')
+  async updateRating(@Param('id') id: string, @Body('rating') rating: number) {
+    return this.articlesService.updateRating(id, rating);
+  }
 }
