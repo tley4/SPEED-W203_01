@@ -3,12 +3,15 @@ export class CreateArticleDto {
   title: string;
   abstract: string;
   doi?: string;
-  keywords?: string;
+  sePractice?: string;
   articleType: string;
   publicationDate: string;
   author: string;
   createdAt: Date;
-  status: string;
+  moderationStatus: string = 'pending';
   analystComment?: string;
-  isSubmitted: boolean;
+  isSubmitted: boolean = false;
+  ratingSum: number = 0;
+  ratingCount: number = 0;
+  averageRating: number | null = null;
 }
