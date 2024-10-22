@@ -91,3 +91,8 @@ h1 {
     text-wrap: balance;
   }
 }
+
+.search-bar {
+  background-color: white;
+  color: black;
+}

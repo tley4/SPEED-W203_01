@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useParams } from "next/navigation";
@@ -13,7 +12,7 @@ interface Article {
   doi: string;
   claim: string;
   evidence: string;
-  rating: number [];
+  rating: number[];
   status: string;
   sePractice: string;
   articleType: string;
@@ -27,7 +26,7 @@ const ArticleDetailsPage = () => {
   useEffect(() => {
     const fetchArticle = async () => {
       try {
-        const response = await fetch(`http://localhost:8082/articles/${id}`);
+        const response = await fetch(`http://localhost:5000/articles/${id}`);
         const data = await response.json();
         setArticle(data);
       } catch (error) {
@@ -45,34 +44,33 @@ const ArticleDetailsPage = () => {
   }
 
   const averageRating = article.rating && article.rating.length > 0 
-  ? (article.rating.reduce((acc, curr) => acc + curr, 0) / article.rating.length).toFixed(1) 
-  : "No ratings yet";
+    ? (article.rating.reduce((acc, curr) => acc + curr, 0) / article.rating.length).toFixed(1) 
+    : "No ratings yet";
 
   return (
-    <div className="min-h-screen mt-16 p-8 bg-gray-50">
-      <div className="max-w-4xl mx-auto shadow-lg rounded-lg p-6 bg-white">
-        <h1 className="text-2xl font-bold mb-4">Title: {article.title}</h1>
-        <p className="mb-2"><strong>Authors:</strong> {article.authors}</p>
-        <p className="mb-2"><strong>Source:</strong> {article.source}</p>
-        <p className="mb-2"><strong>Publication Date:</strong> {article.publicationDate.toString()}</p>
-        <p className="mb-2"><strong>DOI:</strong> {article.doi}</p>
-        <p className="mb-2"><strong>Claim:</strong> {article.claim.length > 0 ? article.claim : "N/A"}</p>
-        <p className="mb-2"><strong>Evidence:</strong> {article.evidence.length > 0 ? article.evidence : "N/A"}</p>
-        <p className="mb-2"><strong>Average Rating:</strong> {averageRating}/5</p>
-        <p className="mb-2"><strong>Status:</strong> {article.status || "N/A"}</p>
-        <p className="mb-2"><strong>SE Practice:</strong> {article.sePractice}</p>
-        <p className="mb-2"><strong>Research Type:</strong> {article.articleType}</p>
-    
+    <div className="article-details-page">
+      <div className="article-details-container">
+        <h1 className="article-title">Title: {article.title}</h1>
+        <p className="article-detail"><strong>Authors:</strong> {article.authors}</p>
+        <p className="article-detail"><strong>Source:</strong> {article.source}</p>
+        <p className="article-detail"><strong>Publication Date:</strong> {new Date(article.publicationDate).toDateString()}</p>
+        <p className="article-detail"><strong>DOI:</strong> {article.doi}</p>
+        <p className="article-detail"><strong>Claim:</strong> {article.claim || "N/A"}</p>
+        <p className="article-detail"><strong>Evidence:</strong> {article.evidence || "N/A"}</p>
+        <p className="article-detail"><strong>Average Rating:</strong> {averageRating}/5</p>
+        <p className="article-detail"><strong>Status:</strong> {article.status || "N/A"}</p>
+        <p className="article-detail"><strong>SE Practice:</strong> {article.sePractice}</p>
+        <p className="article-detail"><strong>Research Type:</strong> {article.articleType}</p>
 
-        <div className="mt-4">
-          <label htmlFor="rating" className="block mb-2 font-medium">Add Rating:</label>
+        <div className="rating-section">
+          <label htmlFor="rating" className="rating-label">Add Rating:</label>
           <select
             id="rating"
             name="rating"
             value={newRating}
             onChange={(e) => setNewRating(Number(e.target.value))}
             required
-            className="mb-4 p-2 w-full bg-gray-200 border border-gray-300 rounded"
+            className="rating-select"
           >
             <option value="0" disabled>Select a rating</option>
             <option value="1">1</option>
@@ -85,7 +83,7 @@ const ArticleDetailsPage = () => {
             type="button"
             onClick={async () => {
               try {
-                const response = await fetch(`http://localhost:8082/articles/${id}/rate`, {
+                const response = await fetch(`http://localhost:5000/articles/${id}/rate`, {
                   method: 'PATCH',
                   headers: {
                     'Content-Type': 'application/json',
@@ -103,7 +101,7 @@ const ArticleDetailsPage = () => {
                 console.error("Error submitting rating:", error);
               }
             }}
-            className="inline-block bg-green-500 hover:bg-green-700 text-white font-medium p-2 rounded"
+            className="rating-button"
           >
             Rate Article
           </button>

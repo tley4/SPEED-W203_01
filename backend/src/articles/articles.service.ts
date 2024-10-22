@@ -14,6 +14,30 @@ export class ArticlesService {
     return this.articleModel.find().exec(); // Fetch all articles
   }
 
+  // Search articles based on title, SE practice, or publication year
+  async searchArticles(
+    title?: string,
+    sePractice?: string,
+    publicationYear?: string,
+  ): Promise<Article[]> {
+    const query: any = {};
+
+    if (title) {
+      query.title = { $regex: title, $options: 'i' }; // Case-insensitive search
+    }
+
+    if (sePractice) {
+      query.sePractice = { $regex: sePractice, $options: 'i' }; // Search by SE practice
+    }
+
+    if (publicationYear) {
+      // Search based on the year portion of the publicationDate string (assuming YYYY-MM-DD format)
+      query.publicationDate = { $regex: `^${publicationYear}` }; // Matches strings starting with the year
+    }
+
+    return this.articleModel.find(query).exec();
+  }
+
   // Fetch only pending articles based on moderationStatus
   async findPending(): Promise<Article[]> {
     return this.articleModel.find({ moderationStatus: 'pending' }).exec();
