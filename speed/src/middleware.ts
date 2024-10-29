@@ -24,12 +24,6 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  if (request.nextUrl.pathname.startsWith("/analyse_article")) {
-    if (role !== "analyst") {
-      return NextResponse.redirect(new URL("/", request.nextUrl.origin)); // Redirect to home if not a moderator
-    }
-  }
-
   // Allow the request to proceed if authenticated or already on the login page or the home page
   return NextResponse.next();
 }

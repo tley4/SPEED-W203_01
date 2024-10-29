@@ -1,12 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
-import '../css/navBar.css';
+import '../css/navBar.scss';
 
 const Navbar: React.FC = () => {
   return (
     <div className="navbar">
       <div className="flex-1">
-        <a className="bg-light-green text-2xl w-30 h-20 flex items-center justify-center">
+        <a className="bg-[#C7F6C7] text-2xl w-30 h-20 flex items-center justify-center">
           SPEED
         </a>
       </div>
