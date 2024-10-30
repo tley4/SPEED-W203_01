@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../css/Articles.css';
-import ArticleApproval from './articleApproval';  // Import the ArticleApproval component
+import ArticleApproval from './articleApproval';
 
 // Define the structure of an article
 interface Article {
@@ -16,24 +16,34 @@ interface Article {
   publicationDate: string;
   author: string;
   createdAt: Date;
-  moderationStatus: string;  // Use moderationStatus instead of status
+  moderationStatus: string;
 }
 
 const ArticlesPage = () => {
-  // Manage the articles, loading state, and error state
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [userRole, setUserRole] = useState<string | null>(null);
 
-  // Fetch articles on component mount
+  // Fetch articles and user role on component mount
   useEffect(() => {
-    fetchArticles();
+    // Fetch role from sessionStorage
+    const role = sessionStorage.getItem('role');
+    setUserRole(role);
+
+    // Fetch articles if user has moderator role
+    if (role === 'moderator') {
+      fetchArticles();
+    } else {
+      setLoading(false); // Stop loading if the user does not have permission
+    }
   }, []);
 
   // Fetch only pending articles from backend
   const fetchArticles = async () => {
     try {
-      const response = await axios.get<Article[]>('http://localhost:5000/articles/pending'); // Use the pending endpoint
+      const articlesPendingUrl = `${process.env.NEST_PUBLIC_API_URL}articles/pending`;
+      const response = await axios.get<Article[]>(articlesPendingUrl);
       setArticles(response.data);
     } catch (error) {
       console.error('Error fetching pending articles:', error);
@@ -45,7 +55,10 @@ const ArticlesPage = () => {
 
   // Display loading message while fetching
   if (loading) return <p>Loading articles...</p>;
-  
+
+  // Display "Invalid Permissions" if the role is not "moderator"
+  if (userRole !== 'moderator') return <p>Invalid Permissions</p>;
+
   // Display error message if fetching fails
   if (error) return <p>Error: {error}</p>;
 
@@ -55,10 +68,8 @@ const ArticlesPage = () => {
       {/* Conditionally render list of articles or message if none found */}
       {articles.length > 0 ? (
         <ul className="article-list">
-          {/* Map through the list of articles */}
           {articles.map((article) => (
             <li key={article._id} className="article-item">
-              {/* Article content area */}
               <div className="article-content">
                 <h3><strong>Article Title:</strong> {article.title}</h3>
                 <p><strong>Abstract:</strong> {article.abstract}</p>
@@ -70,14 +81,11 @@ const ArticlesPage = () => {
                 <p><strong>Created at:</strong> {new Date(article.createdAt).toLocaleDateString()}</p>
               </div>
 
-              {/* Article actions area */}
               <div className="article-actions-container">
-                {/* Display moderation status */}
                 <p className="article-status">
                   <strong>Status:</strong>
                 </p>
 
-                {/* Save or approve buttons */}
                 {article.moderationStatus === 'pending' ? (
                   <ArticleApproval articleId={article._id} currentStatus={article.moderationStatus} onUpdate={fetchArticles} />
                 ) : (

@@ -28,7 +28,8 @@ const DashboardPage = () => {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const response = await fetch('http://localhost:5000/articles/submitted');
+        const fetchArticlesUrl = `${process.env.NEST_PUBLIC_API_URL}articles/submitted`;
+        const response = await fetch(fetchArticlesUrl);
         const data = await response.json();
         setArticles(data);
       } catch (error) {

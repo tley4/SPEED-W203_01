@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -24,15 +24,24 @@ const AnalystPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
   const [comment, setComment] = useState<string>('');
+  const [userRole, setUserRole] = useState<string | null>(null);
 
-  // Fetch approved articles on component mount
+  // Fetch approved articles and check user role on component mount
   useEffect(() => {
-    fetchApprovedArticles();
+    const role = sessionStorage.getItem('role');
+    setUserRole(role);
+
+    if (role === 'analyst') {
+      fetchApprovedArticles();
+    } else {
+      setLoading(false); // Stop loading if user does not have permission
+    }
   }, []);
 
   const fetchApprovedArticles = async () => {
     try {
-      const response = await axios.get<Article[]>('http://localhost:5000/articles/approved');
+      const approvedArticlesUrl = `${process.env.NEST_PUBLIC_API_URL}articles/approved`;
+      const response = await axios.get<Article[]>(approvedArticlesUrl);
       setArticles(response.data);
     } catch (error) {
       console.error('Error fetching approved articles:', error);
@@ -42,21 +51,25 @@ const AnalystPage = () => {
     }
   };
 
-  // Submit article with analyst comment
   const handleSubmit = async (articleId: string) => {
     try {
-      await axios.patch(`http://localhost:5000/articles/${articleId}/analyst-submit`, {
+      const analysedArticlesUrl = `${process.env.NEST_PUBLIC_API_URL}articles/${articleId}/analyst-submit`;
+      await axios.patch(analysedArticlesUrl, {
         analystComment: comment,
       });
-      fetchApprovedArticles(); // Refresh the list of approved articles
-      setSelectedArticle(null); // Clear selected article
-      setComment(''); // Clear comment field
+      fetchApprovedArticles();
+      setSelectedArticle(null);
+      setComment('');
     } catch (error) {
       console.error('Error submitting article:', error);
     }
   };
 
   if (loading) return <p>Loading articles...</p>;
+
+  // Display "Invalid Permissions" if the role is not "analyst"
+  if (userRole !== 'analyst') return <p>Invalid Permissions</p>;
+
   if (error) return <p>Error: {error}</p>;
 
   return (

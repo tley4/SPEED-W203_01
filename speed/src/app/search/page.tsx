@@ -36,7 +36,8 @@ const BrowsePage = () => {
   const fetchArticles = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/articles");
+      const articlesUrl = `${process.env.NEST_PUBLIC_API_URL}articles`;
+      const response = await fetch(articlesUrl);
       const data = await response.json();
       setArticles(data);
     } catch (error) {
@@ -51,8 +52,9 @@ const BrowsePage = () => {
     try {
       const query = new URLSearchParams();
       query.append(type, term);
-
-      const response = await fetch(`http://localhost:5000/articles/search?${query.toString()}`);
+      
+      const articlesSearchUrl = `${process.env.NEST_PUBLIC_API_URL}articles/search?${query.toString()}`;
+      const response = await fetch(articlesSearchUrl);
       const data = await response.json();
       setArticles(data);
     } catch (error) {

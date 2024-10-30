@@ -26,7 +26,8 @@ const ArticleDetailsPage = () => {
   useEffect(() => {
     const fetchArticle = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/articles/${id}`);
+        const articleUrl = `${process.env.NEST_PUBLIC_API_URL}/articles/${id}`;
+        const response = await fetch(articleUrl);
         const data = await response.json();
         setArticle(data);
       } catch (error) {
@@ -83,7 +84,8 @@ const ArticleDetailsPage = () => {
             type="button"
             onClick={async () => {
               try {
-                const response = await fetch(`http://localhost:5000/articles/${id}/rate`, {
+                const articlesRatingUrl = `${process.env.NEST_PUBLIC_API_URL}articles/${id}/rate`;
+                const response = await fetch(articlesRatingUrl, {
                   method: 'PATCH',
                   headers: {
                     'Content-Type': 'application/json',

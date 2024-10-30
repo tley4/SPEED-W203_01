@@ -23,7 +23,8 @@ const SubmissionPage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5000/articles/submit', {
+      const articlesSubmit = `${process.env.NEST_PUBLIC_API_URL}articles/submit`;
+      const response = await fetch(articlesSubmit, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

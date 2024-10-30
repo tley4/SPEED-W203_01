@@ -20,9 +20,11 @@ const ArticleApproval = ({ articleId, currentStatus, onUpdate }: ArticleApproval
   const handleSave = async () => {
     try {
       if (action === 'approve') {
-        await axios.patch(`http://localhost:5000/articles/${articleId}/approve`);
+        const articlesApproveUrl = `${process.env.NEST_PUBLIC_API_URL}articles/${articleId}/approve`;
+        await axios.patch(articlesApproveUrl);
       } else if (action === 'reject') {
-        await axios.patch(`http://localhost:5000/articles/${articleId}/reject`);
+        const articlesRejectUrl = `${process.env.NEST_PUBLIC_API_URL}articles/${articleId}/reject`;
+        await axios.patch(articlesRejectUrl);
       }
       onUpdate();  // Refresh articles after approval or rejection
     } catch (error) {

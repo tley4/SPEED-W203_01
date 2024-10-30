@@ -16,7 +16,8 @@ const StarRating: React.FC<StarRatingProps> = ({ articleId, initialRating = 0 })
     
     // Send the rating to the backend
     try {
-      const response = await fetch(`http://localhost:5000/articles/${articleId}/rating`, {
+      const articleRatingUrl = `${process.env.NEST_PUBLIC_API_URL}articles/${articleId}/rating`;
+      const response = await fetch(articleRatingUrl, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
